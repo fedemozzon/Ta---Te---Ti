@@ -58,22 +58,27 @@ def oposite(player1):
         return 'o'
 
 def play(player1,player2,round,board):
-    while win(board) == False:
-        round = round+1
+    state = 'Usted ha Empatado'
+    for round in range(1,9):
         if (round % 2 == 0):
             board = move(board,player2,autoposition(board))
         else :
             board = move(board,player1,position())
         printBoard(board)
-    return round
+        if(win(board)):
+            state = win_or_loose(round)
+            break
+    return state
+
+def win_or_loose(result):
+    if (result % 2 == 0):
+        return 'Usted ha perdido'
+    else:
+        return 'Usted ha ganado'
 def game():
     player1 = choosePiece()
     player2 = oposite(player1)
-    round = 0
     board = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
     result = play(player1,player2,round,board)
-    if (result % 2 == 0):
-        print('Usted ha perdido')
-    else:
-        print('Usted ha ganado')
+    print(result)
 game()
