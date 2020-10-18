@@ -1,35 +1,33 @@
 def printBoard(board):
-    print(board[0][0] + '|' + board[0][1] + '|' + board[0][2])
+    print(board[0] + '|' + board[1] + '|' + board[2])
     print('-+-+-')
-    print(board[1][0] + '|' + board[1][1] + '|' + board[1][2])
+    print(board[3] + '|' + board[4] + '|' + board[5])
     print('-+-+-')
-    print(board[2][0] + '|' + board[2][1] + '|' + board[2][2])
+    print(board[6] + '|' + board[7] + '|' + board[8])
 
 def win(board):
-    if (board[0][0] == board[0][1] == board[0][2]):
-        return (board[0][0] == 'x' or board[0][0] == 'o')
-    if (board[1][0] == board[1][1] == board[1][2]):
-        return (board[1][0] == 'x' or board[1][0] == 'o')
-    if (board[2][0] == board[2][1] == board[2][2]):
-        return (board[2][0] == 'x' or board[2][0] == 'o')
-    if (board[0][0] == board[1][0] == board[2][0]):
-        return (board[0][0] == 'x' or board[0][0] == 'o')
-    if (board[0][1] == board[1][1] == board[2][1]):
-        return (board[0][1] == 'x' or board[0][1] == 'o')
-    if (board[0][2] == board[1][2] == board[2][2]):
-        return (board[0][2] == 'x' or board[0][2] == 'o')
-    if (board[0][0] == board[1][1] == board[2][2]):
-        return (board[0][0] == 'x' or board[0][0] == 'o')
-    if (board[0][2] == board[1][1] == board[2][0]):
-        return (board[0][2] == 'x' or board[0][2] == 'o')
+    if (board[0] == board[1] == board[2]):
+        return (board[0]== 'x' or board[0] == 'o')
+    if (board[3] == board[4] == board[5]):
+        return (board[3] == 'x' or board[3] == 'o')
+    if (board[6] == board[7] == board[8]):
+        return (board[6] == 'x' or board[6] == 'o')
+    if (board[0] == board[3] == board[6]):
+        return (board[0][0] == 'x' or board[0] == 'o')
+    if (board[1] == board[4] == board[7]):
+        return (board[1] == 'x' or board[1] == 'o')
+    if (board[2] == board[5] == board[8]):
+        return (board[2] == 'x' or board[2] == 'o')
+    if (board[0] == board[4] == board[8]):
+        return (board[0] == 'x' or board[0] == 'o')
+    if (board[2] == board[4] == board[6]):
+        return (board[2] == 'x' or board[2] == 'o')
     return False
 
 def move (board,player):
-    print('Ingrese una columna donde desea colocar su pieza')
-    column = int(input())
-    print('Ingrese una fila donde desea colocar su pieza')
-    row = int(input())
-    board[column][row] = player
+    print('Ingrese una posición donde desea colocar su pieza')
+    position = int(input())
+    board[position]= player
     return board
 
 def choosePiece():
@@ -55,7 +53,7 @@ def game():
     player1 = choosePiece()
     player2 = oposite(player1)
     round = 0
-    board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+    board = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
     play(player1,player2,round,board)
     print('Usted ha ganado jugador')
 game()
