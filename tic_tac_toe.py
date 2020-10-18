@@ -1,9 +1,12 @@
+import random
 def printBoard(board):
     print(board[0] + '|' + board[1] + '|' + board[2])
     print('-+-+-')
     print(board[3] + '|' + board[4] + '|' + board[5])
     print('-+-+-')
     print(board[6] + '|' + board[7] + '|' + board[8])
+    print()
+    print()
 
 def win(board):
     if (board[0] == board[1] == board[2]):
@@ -24,11 +27,24 @@ def win(board):
         return (board[2] == 'x' or board[2] == 'o')
     return False
 
-def move (board,player):
-    print('Ingrese una posición donde desea colocar su pieza')
-    position = int(input())
+def move (board,player,position):
     board[position]= player
     return board
+
+def position():
+    print('Ingrese una posición donde desea colocar su pieza')
+    position = int(input())
+    return position
+
+def autoposition(board):
+    return random.choice(positionToChoose(board))
+
+def positionToChoose(board):
+    positionToChoose = []
+    for index in range(len(board)):
+        if (board[index] == ' '):
+            positionToChoose.append(index)
+    return positionToChoose
 
 def choosePiece():
     print('Elija el tipo de pieza a utilizar para el jugador 1')
@@ -45,15 +61,19 @@ def play(player1,player2,round,board):
     while win(board) == False:
         round = round+1
         if (round % 2 == 0):
-            board = move(board,player2)
+            board = move(board,player2,autoposition(board))
         else :
-            board = move(board,player1)
+            board = move(board,player1,position())
         printBoard(board)
+    return round
 def game():
     player1 = choosePiece()
     player2 = oposite(player1)
     round = 0
     board = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
-    play(player1,player2,round,board)
-    print('Usted ha ganado jugador')
+    result = play(player1,player2,round,board)
+    if (result % 2 == 0):
+        print('Usted ha perdido')
+    else:
+        print('Usted ha ganado')
 game()
